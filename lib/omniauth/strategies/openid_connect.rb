@@ -103,6 +103,10 @@ module OmniAuth
         redirect authorize_uri
       end
 
+      def on_callback_path?
+        on_path?(callback_path) && !request.env['omniauth.auth']
+      end
+
       def callback_phase
         error = params['error_reason'] || params['error']
         error_description = params['error_description'] || params['error_reason']
